@@ -1,0 +1,76 @@
+# Isen Transport – Installation beim Kunden (K-43). Fertige Images aus dem Registry, keine Quelltexte.
+# Version, Ports und Ordner stehen in .env (von setup.ps1 erzeugt, vom Update-Task gepflegt).
+name: ${COMPOSE_PROJECT_NAME:-isen-transport}
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:-isen_flotte}
+      POSTGRES_USER: ${DB_USER:-flotte}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD fehlt in .env}
+      TZ: Europe/Berlin
+    volumes:
+      - ${DATA_DIR:?DATA_DIR fehlt}/db:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:${DB_PORT:-5442}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  api:
+    image: ghcr.io/dosstt/isen-transport-api@sha256:5ecb1ce3d37b1f376ec02ac99601b2bc2aef10f8d8ce4039c3821683f186a543
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://${DB_USER:-flotte}:${DB_PASSWORD}@db:5432/${DB_NAME:-isen_flotte}
+      FILES_DIR: /data/files
+      BACKUP_DIR: /data/backups
+      UPDATE_DIR: /data/update
+      HOST_HOME: ${HOST_HOME:-}
+      HOST_HOME_MOUNT: /host
+      TZ: Europe/Berlin
+    volumes:
+      - ${DATA_DIR}/files:/data/files
+      - ${DATA_DIR}/backups:/data/backups:ro
+      - ${DATA_DIR}/update:/data/update
+      - ${HOST_HOME:-./data/import}:/host:ro
+    ports:
+      # Nur lokal: Browser und Telefone gehen über "web" (/api wird weitergeleitet)
+      - "127.0.0.1:${API_PORT:-4100}:4100"
+
+  web:
+    image: ghcr.io/dosstt/isen-transport-web@sha256:1164b7cb9b6d9d3cf87dedd85ca1cd99075c83b3e08b7cf9b6f3dfb0c4f5a41d
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    environment:
+      API_INTERNAL_URL: http://api:4100
+      TZ: Europe/Berlin
+    ports:
+      - "${WEB_PORT:-8081}:3000"
+
+  backup:
+    image: ghcr.io/dosstt/isen-transport-backup@sha256:2ce5d974a6c5600bb252f171ef74646d67c10f9bc4db6b67fe81dda977fbafdf
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGHOST: db
+      PGUSER: ${DB_USER:-flotte}
+      PGPASSWORD: ${DB_PASSWORD}
+      PGDATABASE: ${DB_NAME:-isen_flotte}
+      BACKUP_TIME: ${BACKUP_TIME:-02:00}
+      TZ: Europe/Berlin
+    volumes:
+      - ${DATA_DIR}/files:/data/files:ro
+      - ${DATA_DIR}/backups:/backups
+      - ${BACKUP_SECOND_TARGET:-./data/backups-2}:/backups-2

@@ -1,25 +1,19 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.1",
   "date": "2026-10-26",
   "notes": {
     "tr": [
-      "Spesen kuralı: başlangıç en erken 05:30, 8 saatten fazla → 14 €; 8 saati aşmayan günlerde uyarı",
-      "Maaş listesi her açılışta yeni takograf verileriyle kendiliğinden hesaplanır; gün gün döküm aynı ekranda",
-      "Tablolar Excel gibi çizgili; sütunlar \"İşe giriş / İşten çıkış\"",
-      "Genel bakışta \"Bugün yapılacaklar\" ve günün ilk açılışında kontrol penceresi",
-      "İşten çıkanlar kart okuma ve belge uyarılarından çıkarıldı",
-      "TACHO klasörü Ayarlar'dan seçilebilir; bulgu açıklamaları; otomatik güncelleme"
+      "Güvenlik güncellemesi: web arayüzü (Next.js) ve e-posta/yükleme bileşenlerindeki açıklar kapatıldı",
+      "Güncellemeler artık imzalı: program sadece Isen Transport tarafından imzalanmış sürümleri kurar",
+      "Program arka ucu sadece bu bilgisayardan erişilebilir; ağdaki cihazlar web sayfası üzerinden girer"
     ],
     "de": [
-      "Spesenregel: Beginn frühestens 05:30, mehr als 8 Std. → 14 €; Warnung bei Tagen bis 8 Std.",
-      "Lohnliste rechnet bei jedem Öffnen mit neuen Tachodaten; Tagesaufstellung im selben Bildschirm",
-      "Tabellen mit Gitterlinien wie Excel; Spalten \"Eintritt / Austritt\"",
-      "Übersicht mit \"Heute zu tun\" und Tageskontrolle beim ersten Öffnen",
-      "Ausgeschiedene erhalten keine Download- und Fristwarnungen mehr",
-      "TACHO-Ordner in den Einstellungen wählbar; Erklärung der Befunde; automatische Updates"
+      "Sicherheitsupdate: Lücken in der Weboberfläche (Next.js) sowie in E-Mail- und Upload-Komponenten geschlossen",
+      "Updates sind jetzt signiert: das Programm installiert nur von Isen Transport signierte Versionen",
+      "Programm-Schnittstelle nur noch auf diesem PC erreichbar; Geräte im Netz gehen über die Webseite"
     ]
   },
-  "compose": "https://raw.githubusercontent.com/Dosstt/isen-transport-updates/main/0.2.0/docker-compose.yml",
-  "composeSha256": "5ec54ad9ad3d978107218fdb38e7268919d4efd08efdff5f81510fc417bd9ffe",
-  "signature": "MarJj1/G13BXY15vm502++nJHpY1HZc4SBNinqcIMyIfLq7nZHkdiMuZ6MyC99Szl51i5ep47AIwv08ldzK3DQ=="
+  "compose": "https://raw.githubusercontent.com/Dosstt/isen-transport-updates/main/0.2.1/docker-compose.yml",
+  "composeSha256": "170a8416f2f28ab127315a59c09ea6d3e6081e0594f3bf8a729b2cbed0be24e7",
+  "signature": "O0Y/gK1aSItOavnmQbUqzDJZ3KK/GpH/LAouppMY0XewzkVjQThg+VGZvEjDduIwsMCMXa09ay1L0RDkSdGdAQ=="
 }
