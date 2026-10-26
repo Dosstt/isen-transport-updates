@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "date": "2026-10-26",
+  "notes": {
+    "tr": [
+      "Spesen kuralı: başlangıç en erken 05:30, 8 saatten fazla → 14 €; 8 saati aşmayan günlerde uyarı",
+      "Maaş listesi her açılışta yeni takograf verileriyle kendiliğinden hesaplanır; gün gün döküm aynı ekranda",
+      "Tablolar Excel gibi çizgili; sütunlar \"İşe giriş / İşten çıkış\"",
+      "Genel bakışta \"Bugün yapılacaklar\" ve günün ilk açılışında kontrol penceresi",
+      "İşten çıkanlar kart okuma ve belge uyarılarından çıkarıldı",
+      "TACHO klasörü Ayarlar'dan seçilebilir; bulgu açıklamaları; otomatik güncelleme"
+    ],
+    "de": [
+      "Spesenregel: Beginn frühestens 05:30, mehr als 8 Std. → 14 €; Warnung bei Tagen bis 8 Std.",
+      "Lohnliste rechnet bei jedem Öffnen mit neuen Tachodaten; Tagesaufstellung im selben Bildschirm",
+      "Tabellen mit Gitterlinien wie Excel; Spalten \"Eintritt / Austritt\"",
+      "Übersicht mit \"Heute zu tun\" und Tageskontrolle beim ersten Öffnen",
+      "Ausgeschiedene erhalten keine Download- und Fristwarnungen mehr",
+      "TACHO-Ordner in den Einstellungen wählbar; Erklärung der Befunde; automatische Updates"
+    ]
+  },
+  "compose": "https://raw.githubusercontent.com/Dosstt/isen-transport-updates/main/0.2.0/docker-compose.yml",
+  "composeSha256": "5ec54ad9ad3d978107218fdb38e7268919d4efd08efdff5f81510fc417bd9ffe",
+  "signature": "MarJj1/G13BXY15vm502++nJHpY1HZc4SBNinqcIMyIfLq7nZHkdiMuZ6MyC99Szl51i5ep47AIwv08ldzK3DQ=="
+}
